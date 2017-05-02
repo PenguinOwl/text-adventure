@@ -106,7 +106,7 @@ CHAR-ENEMY: "&"
 #   NODE CONSTRUCTION
 #
 #   USE  [x,y]=>location(text,wall?)
-#   OR   [x,y]=>enemy(name,hp,text,mode,reflect)
+#   OR   [x,y]=>intio(name,hp,text,mode,reflect)
 #
 #   MODES:
 #    npc - shows (text) on encounter
@@ -139,7 +139,7 @@ def parse(config)
     unless cache.split("")[0] == "#" or cache.strip == ""
       d {print "Scanning config line: ", cache, "\n"}
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
-        d {print "Found match: ", e, "\n"}
+        d {print "Found config match: ", e, "\n"}
         e "Formatting..."
         es = e.split(/: /)
         es[1].strip!
@@ -147,6 +147,16 @@ def parse(config)
         ed
         e "Adding to config..."
         $config.merge!(Hash[[es]])
+        ed
+      end
+      cache.scan(/\[\d+,\d+\]=>(?:location\("\S+",(?:true|false)\)|intio\("\w+",\d+,"\S+","\S+",(?:true|false)\))/).each do |e|
+        d {print "Found node match: ", e, "\n"}
+        e "Formatting..."
+        superCache = []
+        e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
+        ed
+        e "Adding to board..."
+        $board[superCache[0]][superCache[1]] = Node.new(superCache)
         ed
       end
     else
@@ -181,5 +191,18 @@ def loadConfig
 end
 e "Loaded loadConfig()"
 ed
+
+def genBoard
+  system "clear"
+  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"] + "\n"
+  1.upto($config["BOARD-HEIGHT"]) do |height|
+    1.upto($config["BOARD-WIDTH"]) do |width|
+      print $board[width][height].bchar
+    end
+    puts ""
+  end
+  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"]
+end
+e "Loaded genBoard"
 
 loadConfig
