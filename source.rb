@@ -102,7 +102,7 @@ end
 
 def d
   if flag("-d")
-    print Time.now.to_s + ": "
+#    print Time.now.to_s + ": "
     yield
   end
 end
