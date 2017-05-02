@@ -76,7 +76,8 @@ def parse(config)
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
         d {puts e}
         es = e.split(/: /)
-        es[1].strip!.gsub!(/^"|"$/, "")
+        es[1].strip!
+        es[1].gsub!(/^"|"$/, "")
         $config.merge!(Hash[[es]])
       end
     end
