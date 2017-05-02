@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   - 2.2
-script: ruby source.rb -rc
+script: ruby source.rb -rc -d
 install: gem install curses
 branches:
   only:
