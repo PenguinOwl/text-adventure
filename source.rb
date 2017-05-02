@@ -70,9 +70,9 @@ end
 def parse(config)
   config.split("\n").each do |cache|
     unless cache.split("")[0] == "#"
-      d {print "Scanning config line:", cache, "\n"}
+      d {print "Scanning config line: ", cache, "\n"}
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
-        d {print "Found match:", e, "\n"}
+        d {print "Found match: ", e, "\n"}
         es = e.split(/: /)
         es[1].strip!
         es[1].gsub!(/^"|"$/, "")
