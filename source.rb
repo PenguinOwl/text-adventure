@@ -28,7 +28,6 @@ def e(text)
     puts text
   end
 end
-e "Loaded e()"
 
 def flag(id,chk=false)
   if chk
@@ -37,6 +36,7 @@ def flag(id,chk=false)
     return ARGV.include? id
   end
 end
+e "Loaded e()"
 e "Loaded flag()"
 
 def fg(id)
