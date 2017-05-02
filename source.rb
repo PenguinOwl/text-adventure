@@ -35,12 +35,12 @@ FLAG: "-rc"
 BOARD-HEIGHT: 5
 BOARD-WIDTH: 5
 
-CHAR-CORNER: '+'
-CHAR-VERTICAL: '|'
-CHAR-HORIZONTAL: '-'
-CHAR-SPACE: ' '
-CHAR-PLAYER: '0'
-CHAR-ENEMY: '&'
+CHAR-CORNER: "+"
+CHAR-VERTICAL: "|"
+CHAR-HORIZONTAL: "-"
+CHAR-SPACE: " "
+CHAR-PLAYER: "0"
+CHAR-ENEMY: "&"
 
 #
 #   NODE CONSTRUCTION
@@ -69,9 +69,11 @@ def resetConfig
 end
 
 def parse(config)
-  config.eachline do |cache|
+  config.split("\n").each do |cache|
+    d {puts cache}
     unless cache.split("")[0] == "#"
-      cache.scan(/\w+(: )\w+/).each do |e|
+      cache.scan(/\w+: \w+/).each do |e|
+        d {puts e}
         e = e.split(": ")
         $config.merge(Hash[e])
       end
@@ -84,10 +86,24 @@ end
 #
 
 def flag(id,chk=false)
-  if ck
+  if chk
     return $ARGV[$ARGV.index(id)+1]
   else
-    return $ARGV ~= id
+    return $ARGV =~ id
   end
 end
 
+def fg(id)
+  if $ARGV =~ id
+    yield
+  end
+end
+
+def d
+  if flag("-d")
+    yield
+  end
+end
+
+puts "hi there\nwow: chesse".scan(/\w+: \w+/)
+puts parse(autoParse)
