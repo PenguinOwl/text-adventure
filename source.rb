@@ -10,9 +10,8 @@
 #    5.  [FLAG CHECKS]
 #    6.  [OBJECT DEFINITIONS]
 #    7.  [LOOP DEFINITIONS]
-#    8.  [CONFIG DECODER]
-#    9.  [BULIDING]
-#    10. [MAIN LOOP]
+#    8.  [BULIDING]
+#    9. [MAIN LOOP]
 #
 #   [] INDICATES MADATORY SETUP
 
@@ -108,7 +107,8 @@ def d
 end
 
 d {
-resetConfig
-puts "hi there\nwow: chesse".scan(/\w+: \w+/)
-puts parse(autoParse)
+  resetConfig
+  puts "hi there\nwow: chesse".scan(/\w+: \w+/)
+  parse(autoParse)
+  puts "\n", $config
 }
