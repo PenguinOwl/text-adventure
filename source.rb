@@ -89,14 +89,14 @@ end
 
 def flag(id,chk=false)
   if chk
-    return ARGV[$ARGV.index(id)+1]
+    return ARGV[ARGV.index(id)+1]
   else
-    return ARGV =~ id
+    return ARGV.include? id
   end
 end
 
 def fg(id)
-  if ARGV =~ id
+  if ARGV.include? id
     yield
   end
 end
