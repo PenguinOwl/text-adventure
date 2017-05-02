@@ -21,18 +21,18 @@ autoParse = <<ENDOFFILE
 #   CONFIG OVERIDE
 #
 
-MANUAL-CONFIG: FALSE
+MANUAL-CONFIG: "false"
 FLAG: "-path"
 
-RUN-CHECKS: FALSE
+RUN-CHECKS: "false"
 FLAG: "-rc"
 
 #
 #   BOARD CONSTRUCTION
 #
 
-BOARD-HEIGHT: 5
-BOARD-WIDTH: 5
+BOARD-HEIGHT: "5"
+BOARD-WIDTH: "5"
 
 CHAR-CORNER: "+"
 CHAR-VERTICAL: "|"
@@ -76,6 +76,7 @@ def parse(config)
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
         d {puts e}
         es = e.split(/: /)
+        es[1].strip!.gsub!(/^"|"$/, "")
         $config.merge!(Hash[[es]])
       end
     end
