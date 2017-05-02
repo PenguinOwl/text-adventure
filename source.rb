@@ -58,8 +58,6 @@ CHAR-ENEMY: "&"
 
 ENDOFFILE
 
-puts ARGV. flag("-d")
-
 #
 #   CONFIG DECODER
 #
@@ -132,3 +130,5 @@ def loadConfig
     }
   end
 end
+
+puts ARGV. flag("-d")
