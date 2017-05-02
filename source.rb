@@ -59,6 +59,8 @@ CHAR-ENEMY: "&"
 
 ENDOFFILE
 
+puts ARGV
+
 #
 #   CONFIG DECODER
 #
@@ -75,7 +77,7 @@ def parse(config)
       cache.scan(/\w+: \w+/).each do |e|
         d {puts e}
         e = e.split(": ")
-        $config.merge(Hash[e])
+        $config.merge!(Hash[e])
       end
     end
   end
@@ -87,14 +89,14 @@ end
 
 def flag(id,chk=false)
   if chk
-    return $ARGV[$ARGV.index(id)+1]
+    return ARGV[$ARGV.index(id)+1]
   else
-    return $ARGV =~ id
+    return ARGV =~ id
   end
 end
 
 def fg(id)
-  if $ARGV =~ id
+  if ARGV =~ id
     yield
   end
 end
@@ -105,5 +107,8 @@ def d
   end
 end
 
+d {
+resetConfig
 puts "hi there\nwow: chesse".scan(/\w+: \w+/)
 puts parse(autoParse)
+}
