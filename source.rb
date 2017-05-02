@@ -131,4 +131,4 @@ def loadConfig
   end
 end
 
-puts ARGV. flag("-d")
+puts ARGV, flag("-d")
