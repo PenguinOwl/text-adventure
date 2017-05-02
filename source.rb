@@ -3,15 +3,16 @@
 #   CENTRAL PROSSESING FILE
 #
 #   CONTAINS:
-#    1. CONFIG OVERIDE
-#    2. BOARD CONSTRUCTION
-#    3. NODE CONSTRUCTION
-#    4. [FLAG CHECKS]
-#    5. [OBJECT DEFINITIONS]
-#    6. [LOOP DEFINITIONS]
-#    7. [CONFIG DECODER]
-#    8. [BULIDING]
-#    9. [MAIN LOOP]
+#    1.  CONFIG OVERIDE
+#    2.  BOARD CONSTRUCTION
+#    3.  NODE CONSTRUCTION
+#    4.  [CONFIG DECODER]
+#    5.  [FLAG CHECKS]
+#    6.  [OBJECT DEFINITIONS]
+#    7.  [LOOP DEFINITIONS]
+#    8.  [CONFIG DECODER]
+#    9.  [BULIDING]
+#    10. [MAIN LOOP]
 #
 #   [] INDICATES MADATORY SETUP
 
@@ -62,11 +63,31 @@ ENDOFFILE
 #   CONFIG DECODER
 #
 
-def parse(config)
+def resetConfig
+  $oldConfig = $config
   $config = {}
+end
+
+def parse(config)
   config.eachline do |cache|
     unless cache.split("")[0] == "#"
-      
+      cache.scan(/\w+(: )\w+/).each do |e|
+        e = e.split(": ")
+        $config.merge(Hash[e])
+      end
     end
   end
 end
+
+#
+#   FLAG CHECKS
+#
+
+def flag(id,chk=false)
+  if ck
+    return $ARGV[$ARGV.index(id)+1]
+  else
+    return $ARGV ~= id
+  end
+end
+
