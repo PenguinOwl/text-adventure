@@ -22,10 +22,10 @@ autoParse = <<ENDOFFILE
 #
 
 MANUAL-CONFIG: "false"
-FLAG: "-path"
+MC-FLAG: "-path"
 
 RUN-CHECKS: "false"
-FLAG: "-rc"
+RC-FLAG: "-rc"
 
 #
 #   BOARD CONSTRUCTION
@@ -104,13 +104,31 @@ end
 
 def d
   if flag("-d")
+    print Time.now.to_s + ": "
     yield
   end
 end
 
-d {
+def rc
+  if flag($config["RC-FLAG"]) or $config["RUN-CHECKS"] == "true"
+    print Time.now.to_s + ": "
+    yield
+  end
+end
+
+def loadConfig
   resetConfig
-  puts "hi there\nwow: chesse".scan(/\w+: \w+/)
   parse(autoParse)
-  puts "\n", $config
-}
+  d {
+    print "Loaded default configuation: ", $config, "\n"
+  }
+  if flag($config["MC-FLAG"]) or $config["MANUAL-CONFIG"] == "true"
+    file = File.open(flag($config["MC-FLAG"],true),"rw")
+    resetConfig
+    parse(file.read)
+    file.close
+    d {
+      print "Loaded alternative configuation: ", $config, "\n"
+    }
+  end
+end
