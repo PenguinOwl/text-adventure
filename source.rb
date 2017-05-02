@@ -69,8 +69,8 @@ end
 
 def parse(config)
   config.split("\n").each do |cache|
-    d {puts cache}
     unless cache.split("")[0] == "#"
+      d {print "Scanning config line:", cache, "\n"}
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
         d {puts e}
         es = e.split(/: /)
@@ -78,6 +78,8 @@ def parse(config)
         es[1].gsub!(/^"|"$/, "")
         $config.merge!(Hash[[es]])
       end
+    else
+      d {print "Found commented out line. Ignoring.", "\n"}
     end
   end
 end
