@@ -58,7 +58,7 @@ CHAR-ENEMY: "&"
 
 ENDOFFILE
 
-puts ARGV
+puts ARGV. flag("-d")
 
 #
 #   CONFIG DECODER
