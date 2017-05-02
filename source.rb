@@ -22,6 +22,14 @@
 
 puts Time.now.to_s + ": " + "Loading flag checks..."
 
+def e(text)
+  if flag("-d")
+    print Time.now.to_s + ": "
+    puts text
+  end
+end
+e "Loaded e()"
+
 def flag(id,chk=false)
   if chk
     return ARGV[ARGV.index(id)+1]
@@ -29,12 +37,14 @@ def flag(id,chk=false)
     return ARGV.include? id
   end
 end
+e "Loaded flag()"
 
 def fg(id)
   if ARGV.include? id
     yield
   end
 end
+e "Loaded fg()"
 
 def d
   if flag("-d")
@@ -42,13 +52,7 @@ def d
     yield
   end
 end
-
-def e(text)
-  if flag("-d")
-    print Time.now.to_s + ": "
-    puts text
-  end
-end
+e "Loaded d()"
 
 def ed
   if flag("-d")
@@ -56,6 +60,7 @@ def ed
     puts "Done!"
   end
 end
+e "Loaded ed()"
 
 def rc
   if flag($config["RC-FLAG"]) or $config["RUN-CHECKS"] == "true"
@@ -63,6 +68,7 @@ def rc
     yield
   end
 end
+e "Loaded rc()"
 
 e "Flag checks loaded."
 
@@ -118,12 +124,14 @@ ed
 #   CONFIG DECODER
 #
 
+e "Loading config managment..."
 def resetConfig
   e "Reseting config..."
   $oldConfig = $config
   $config = {}
   ed
 end
+e "Loaded resetConfig()"
 
 def parse(config)
   e "Parsing config..."
@@ -147,7 +155,7 @@ def parse(config)
   end
   ed
 end
-
+e "Loaded parse()"
 
 def loadConfig
   e "Loading config..."
@@ -171,5 +179,7 @@ def loadConfig
     }
   end
 end
+e "Loaded loadConfig()"
+ed
 
 loadConfig
