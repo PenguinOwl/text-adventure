@@ -15,7 +15,7 @@
 #
 #   [] INDICATES MADATORY SETUP
 
-autoParse = <<ENDOFFILE
+$autoParse = <<ENDOFFILE
 
 #
 #   CONFIG OVERIDE
@@ -116,7 +116,7 @@ end
 
 def loadConfig
   resetConfig
-  parse(autoParse)
+  parse($autoParse)
   d {
     print "Loaded default configuation: ", $config, "\n"
   }
