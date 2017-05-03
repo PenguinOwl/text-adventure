@@ -164,7 +164,7 @@ def parse(config,nodeing)
           if superCache[2].strip == "location"
             $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(3))
           else
-           $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(3))
+            $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(3))
           end
         end
         ed
@@ -272,7 +272,7 @@ e "Defining empty board..."
 $board = []
 ed
 loadConfig
-e "Building board skeleton..."
+e "Building board skeleton with length " + $config["WIDTH"] + " and height " + $config["HEIGHT"] + "..."
 $board = Array.new($config["WIDTH"].to_i,Array.new($config["HIEGHT"].to_i,Node.new("",false)))
 ed
 e "Reloading config..."
