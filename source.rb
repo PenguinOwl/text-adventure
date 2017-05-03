@@ -278,6 +278,6 @@ ed
 e "Reloading config..."
 loadConfig(true)
 ed
-unless fg("-d")
+#unless flag("-d")
   genBoard
-end
+#end
