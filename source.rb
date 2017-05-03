@@ -163,6 +163,7 @@ def parse(config,nodeing)
           e "Adding " + $unn.to_s + " to board..."
           if $unn[2].strip == "location"
             e $board[$unn[0].to_i][$unn[1].to_i] = Node.new(*$unn.drop(3))
+            e $board
           else
             e $board[$unn[0].to_i][$unn[1].to_i] = NPC.new(*$unn.drop(3))
           end
