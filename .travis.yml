@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   - 2.2
-script: ruby source.rb -rc -d -s
+script: ruby source.rb -rc -d
 branches:
   only:
   - master
