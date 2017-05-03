@@ -200,7 +200,6 @@ def loadConfig(f=false)
   end
 end
 e "Loaded loadConfig()"
-ed
 
 def bc(val)
   unless val == false or val == true
@@ -275,6 +274,13 @@ def genBoard
   puts $board[$curx][$cury].text
 end
 e "Loaded genBoard()"
+
+def mainloop
+  genboard
+  handle = gets.strip!
+  HANDLE.handle(handle)
+  mainloop
+end
 
 #
 #   BUILDING
