@@ -269,10 +269,13 @@ def genBoard
   print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
   puts ""
   ed
-  e "Genning text..."
-  (system("tput lines").to_i - $config["BOARD-HEIGHT"] - 4).times do puts "" end
-  puts "=" * system("tput cols").to_i
-  puts $board[$curx][$cury].text
+  unless flag("-d")
+    e "Genning text..."
+    (system("tput lines").to_i - $config["BOARD-HEIGHT"] - 4).times do puts "" end
+    puts "=" * system("tput cols").to_i
+    puts $board[$curx][$cury].text
+    ed
+  end
 end
 e "Loaded genBoard()"
 
@@ -300,9 +303,7 @@ def setup
   e "Reloading config..."
   loadConfig(true)
   ed
-  unless flag("-d")
-    genBoard
-  end
+  genBoard
 end
 e "Loaded setup()"
 
