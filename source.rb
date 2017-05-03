@@ -11,7 +11,7 @@
 #    6.  [OBJECT DEFINITIONS]
 #    7.  [LOOP DEFINITIONS]
 #    8.  [BULIDING]
-#    9. [MAIN LOOP]
+#    9.  [MAIN LOOP]
 #
 #   [] INDICATES MADATORY SETUP
 
@@ -99,6 +99,7 @@ CHAR-CORNER: "+"
 CHAR-VERTICAL: "|"
 CHAR-HORIZONTAL: "-"
 CHAR-SPACE: " "
+CHAR-WALL: "#"
 CHAR-PLAYER: "0"
 CHAR-ENEMY: "&"
 
@@ -156,7 +157,7 @@ def parse(config)
         e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
         ed
         e "Adding to board..."
-        $board[superCache[0]][superCache[1]] = Node.new(superCache)
+        $board[superCache[0]][superCache[1]] = Node.new(*superCache.drop(2))
         ed
       end
     else
@@ -192,17 +193,63 @@ end
 e "Loaded loadConfig()"
 ed
 
+def bc(val)
+  if val.upcase.strip == "TRUE"
+    return true
+  else
+    return false
+  end
+end
+
+#
+#   OBJECT DEFINITIONS
+#
+
+class NPC
+  def initialize(name,hp,text,mode,reflect)
+    attr_accessor :bchar :name :hp :text :mode :reflect
+    @name = name
+    @hp = hp.to_i
+    @text = text
+    @mode = mode
+    @reflect = bc reflect
+    @bchar = $config["CHAR-ENEMY"]
+  end
+end
+
+class Node
+  def initialize(text,wall?)
+    attr_accessor :bchar :text :wall
+    @text = text
+    @wall = bc wall?
+    if @wall
+      @bchar = $config["CHAR-WALL"]
+    else
+      @bchar = $config["CHAR-SPACE"]
+    end
+  end
+end
+
+#
+#   LOOP DEFINITIONS
+#
+
 def genBoard
   system "clear"
   print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"] + "\n"
-  1.upto($config["BOARD-HEIGHT"]) do |height|
-    1.upto($config["BOARD-WIDTH"]) do |width|
+  0.upto($config["BOARD-HEIGHT"]) do |height|
+    0.upto($config["BOARD-WIDTH"]) do |width|
       print $board[width][height].bchar
     end
     puts ""
   end
   print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"]
 end
-e "Loaded genBoard"
+e "Loaded genBoard()"
 
+#
+#   BUILDING
+#
+
+$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false))
 loadConfig
