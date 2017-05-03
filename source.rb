@@ -110,7 +110,7 @@ CHAR-ENEMY: "&"
 #   NODE CONSTRUCTION
 #
 #   USE  [x,y]=>location(text,wall?)
-#   OR   [x,y]=>intio(name,hp,text,mode,reflect)
+#   OR   [x,y]=>intio(name,hp,text,mode,reflect?)
 #
 #   MODES:
 #    npc - shows (text) on encounter
@@ -253,14 +253,17 @@ end
 
 def genBoard
   system "clear"
-  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
-  0.upto($config["BOARD-HEIGHT"].to_i) do |height|
-    0.upto($config["BOARD-WIDTH"].to_i) do |width|
-      print $board[width][height].bchar
+  print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
+  0.upto($config["BOARD-HEIGHT"].to_i-1) do |height|
+    print $config["CHAR-VERTICAL"] + " "
+    0.upto($config["BOARD-WIDTH"].to_i-1) do |width|
+      print $board[width][height].bchar, " "
     end
+    print $config["CHAR-VERTICAL"]
     puts ""
   end
-  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
+  print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
+  puts ""
 end
 e "Loaded genBoard()"
 
@@ -273,7 +276,7 @@ $board = []
 ed
 loadConfig
 e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
-$board = Array.new($config["BOARD-WIDTH"].to_i,Array.new($config["BOARD-HIEGHT"].to_i,Node.new("",false)))
+$board = Array.new($config["BOARD-WIDTH"].to_i,Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false)))
 ed
 e "Reloading config..."
 loadConfig(true)
