@@ -187,7 +187,7 @@ def loadConfig(f=false)
   }
   if flag($config["MC-FLAG"]) or $config["MANUAL-CONFIG"] == "true"
     e "Alternate config given. Attempting to open file."
-    file = File.open(flag($config["MC-FLAG"],true),"rw")
+    file = File.open(flag($config["MC-FLAG"],true),"r")
     e "File opened."
     e "Alternate config found. Loading..."
     resetConfig
