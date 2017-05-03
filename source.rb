@@ -251,5 +251,13 @@ e "Loaded genBoard()"
 #   BUILDING
 #
 
-$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
 loadConfig
+e "Building board skeleton..."
+$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
+ed
+e "Reloading config..."
+loadConfig
+ed
+unless fg("-d")
+  genBoard
+end
