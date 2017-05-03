@@ -251,5 +251,5 @@ e "Loaded genBoard()"
 #   BUILDING
 #
 
-$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false))
+$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
 loadConfig
