@@ -251,6 +251,7 @@ e "Loaded genBoard()"
 #   BUILDING
 #
 
+$board = []
 loadConfig
 e "Building board skeleton..."
 $board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
