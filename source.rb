@@ -163,7 +163,6 @@ def parse(config,nodeing)
           e "Adding " + $unn.to_s + " to board..."
           if $unn[2].strip == "location"
             e $board[$unn[0].to_i][$unn[1].to_i] = Node.new(*$unn.drop(3))
-            e $board
           else
             e $board[$unn[0].to_i][$unn[1].to_i] = NPC.new(*$unn.drop(3))
           end
@@ -282,7 +281,7 @@ $board = []
 ed
 loadConfig
 e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
-$board = Array.new($config["BOARD-WIDTH"].to_i,Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false)))
+$board = Array.new($config["BOARD-WIDTH"].to_i) {Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false))}
 ed
 e "Using board : " + $board.to_s
 e "Reloading config..."
