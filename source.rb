@@ -137,7 +137,7 @@ def resetConfig
 end
 e "Loaded resetConfig()"
 
-def parse(config)
+def parse(config,nodeing)
   e "Parsing config..."
   config.split("\n").each do |cache|
     unless cache.split("")[0] == "#" or cache.strip == ""
@@ -153,17 +153,19 @@ def parse(config)
         $config.merge!(Hash[[es]])
         ed
       end
-      cache.scan(/\[\d+,\d+\]=>(?:location\("\S+",(?:true|false)\)|intio\("\w+",\d+,"\S+","\S+",(?:true|false)\))/).each do |e|
-        d {print "Found node match: ", e, "\n"}
-        e "Formatting..."
-        superCache = []
-        e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
-        ed
-        e "Adding to board..."
-        if superCache[2].strip == "location"
-          $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(3))
-        else
-          $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(3))
+      if nodeing
+        cache.scan(/\[\d+,\d+\]=>(?:location\("\S+",(?:true|false)\)|intio\("\w+",\d+,"\S+","\S+",(?:true|false)\))/).each do |e|
+          d {print "Found node match: ", e, "\n"}
+          e "Formatting..."
+          superCache = []
+          e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
+          ed
+          e "Adding to board..."
+          if superCache[2].strip == "location"
+            $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(3))
+          else
+           $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(3))
+          end
         end
         ed
       end
@@ -175,10 +177,10 @@ def parse(config)
 end
 e "Loaded parse()"
 
-def loadConfig
+def loadConfig(f=false)
   e "Loading config..."
   resetConfig
-  parse($autoParse)
+  parse($autoParse,f)
   d {
     print "Loaded default configuation: ", $config, "\n"
   }
@@ -270,7 +272,7 @@ e "Building board skeleton..."
 $board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
 ed
 e "Reloading config..."
-loadConfig
+loadConfig(true)
 ed
 unless fg("-d")
   genBoard
