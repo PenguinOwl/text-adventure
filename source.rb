@@ -203,7 +203,7 @@ e "Loaded loadConfig()"
 ed
 
 def bc(val)
-  unless val == false or vall == true
+  unless val == false or val == true
     if val.upcase.strip == "TRUE"
       return true
     else
