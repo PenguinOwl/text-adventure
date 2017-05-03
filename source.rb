@@ -272,8 +272,8 @@ e "Defining empty board..."
 $board = []
 ed
 loadConfig
-e "Building board skeleton with length " + $config["WIDTH"] + " and height " + $config["HEIGHT"] + "..."
-$board = Array.new($config["WIDTH"].to_i,Array.new($config["HIEGHT"].to_i,Node.new("",false)))
+e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
+$board = Array.new($config["BOARD-WIDTH"].to_i,Array.new($config["BOARD-HIEGHT"].to_i,Node.new("",false)))
 ed
 e "Reloading config..."
 loadConfig(true)
