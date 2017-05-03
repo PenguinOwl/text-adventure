@@ -272,7 +272,7 @@ def genBoard
   e "Genning text..."
   (system("tput lines").to_i - $config["BOARD-HEIGHT"] - 4).times do puts "" end
   puts "=" * system("tput cols").to_i
-  puts $board[curx][cury].text
+  puts $board[$curx][$cury].text
 end
 e "Loaded genBoard()"
 
@@ -280,17 +280,26 @@ e "Loaded genBoard()"
 #   BUILDING
 #
 
-e "Defining empty board..."
-$board = []
+def setup
+  $curx,$cury = 0,0
+  e "Defining empty board..."
+  $board = []
+  ed
+  loadConfig
+  e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
+  $board = Array.new($config["BOARD-WIDTH"].to_i) {Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false))}
+  ed
+  e "Using board : " + $board.to_s
+  e "Reloading config..."
+  loadConfig(true)
+  ed
+  unless flag("-d")
+    genBoard
+  end
+end
+e "Loaded setup()"
+
+e "Here we go..."
+setup
 ed
-loadConfig
-e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
-$board = Array.new($config["BOARD-WIDTH"].to_i) {Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false))}
-ed
-e "Using board : " + $board.to_s
-e "Reloading config..."
-loadConfig(true)
-ed
-#unless flag("-d")
-  genBoard
-#end
+e "End of File"
