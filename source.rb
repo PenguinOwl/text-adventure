@@ -231,6 +231,7 @@ class NPC
     ed
   end
 end
+e "Loaded NPC class."
 
 class Node
   attr_accessor :bchar, :text, :wall
@@ -246,6 +247,7 @@ class Node
     ed
   end
 end
+e "Loaded Node class."
 
 #
 #   LOOP DEFINITIONS
@@ -253,10 +255,12 @@ end
 
 def genBoard
   system "clear"
+  e "Genning board..."
   print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
   0.upto($config["BOARD-HEIGHT"].to_i-1) do |height|
     print $config["CHAR-VERTICAL"] + " "
     0.upto($config["BOARD-WIDTH"].to_i-1) do |width|
+      puts $board[width][height]
       print $board[width][height].bchar, " "
     end
     print $config["CHAR-VERTICAL"]
@@ -264,6 +268,7 @@ def genBoard
   end
   print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
   puts ""
+  ed
 end
 e "Loaded genBoard()"
 
