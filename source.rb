@@ -256,7 +256,7 @@ e "Loaded Node class."
 def genBoard
   system "clear"
   e "Genning board..."
-  e "Using board : " + $config.to_s
+  e "Using board : " + $board.to_s
   print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
   0.upto($config["BOARD-HEIGHT"].to_i-1) do |height|
     print $config["CHAR-VERTICAL"] + " "
