@@ -261,6 +261,7 @@ def genBoard
     print $config["CHAR-VERTICAL"] + " "
     0.upto($config["BOARD-WIDTH"].to_i-1) do |width|
       puts $board[width][height]
+      puts width, height
       print $board[width][height].bchar, " "
     end
     print $config["CHAR-VERTICAL"]
