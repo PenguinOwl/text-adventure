@@ -207,7 +207,7 @@ end
 
 class NPC
   def initialize(name,hp,text,mode,reflect)
-    attr_accessor :bchar :name :hp :text :mode :reflect
+    attr_accessor :bchar, :name, :hp, :text, :mode, :reflect
     @name = name
     @hp = hp.to_i
     @text = text
@@ -219,7 +219,7 @@ end
 
 class Node
   def initialize(text,wall?)
-    attr_accessor :bchar :text :wall
+    attr_accessor :bchar, :text, :wall
     @text = text
     @wall = bc wall?
     if @wall
