@@ -15,7 +15,7 @@
 #
 #   [] INDICATES MADATORY SETUP
 
-require 'handle.rb'
+require 'handle'
 
 #
 #   FLAG CHECKS
