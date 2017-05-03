@@ -141,7 +141,7 @@ def parse(config,nodeing)
   e "Parsing config..."
   config.split("\n").each do |cache|
     unless cache.split("")[0] == "#" or cache.strip == ""
-      d {print "Scanning config line: ", cache, "\n"}
+      d {print "Scanning line: ", cache, "\n"}
       cache.scan(/[a-zA-Z-]+: .+/).each do |e|
         d {print "Found config match: ", e, "\n"}
         e "Formatting..."
@@ -203,10 +203,14 @@ e "Loaded loadConfig()"
 ed
 
 def bc(val)
-  if val.upcase.strip == "TRUE"
-    return true
+  unless val == false or vall == true
+    if val.upcase.strip == "TRUE"
+      return true
+    else
+      return false
+    end
   else
-    return false
+    return val
   end
 end
 
