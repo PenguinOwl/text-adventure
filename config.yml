@@ -1,0 +1,45 @@
+#
+#   CONFIG.YML
+#   HOLD CONFIGURATION FOR SOURCE.RB
+#
+#   CONTAINS:
+#    1.  CONFIG OVERIDE
+#    2.  BOARD CONSTRUCTION
+#    3.  NODE CONSTRUCTION
+
+#
+#   CONFIG OVERIDE
+#
+
+MANUAL-CONFIG: "false"
+MC-FLAG: "-path"
+RUN-CHECKS: "false"
+RC-FLAG: "-rc"
+
+#
+#   BOARD CONSTRUCTION
+#
+
+BOARD-HEIGHT: "5"
+BOARD-WIDTH: "5"
+CHAR-CORNER: "+"
+CHAR-VERTICAL: "|"
+CHAR-HORIZONTAL: "-"
+CHAR-SPACE: " "
+CHAR-WALL: "#"
+CHAR-PLAYER: "0"
+CHAR-ENEMY: "&"
+#
+#   NODE CONSTRUCTION
+#
+#   USE  [x,y]=>location(text,wall?)
+#   OR   [x,y]=>intio(name,hp,text,mode,reflect?)
+#
+#   MODES:
+#    npc - shows (text) on encounter
+#    battle - triggers battle on encounter
+#    
+#   If (reflect) is active, you will be returned to the last location after showing text/battle
+#
+
+[0,0]=>location("TEST",true)
