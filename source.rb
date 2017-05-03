@@ -253,14 +253,14 @@ end
 
 def genBoard
   system "clear"
-  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"] + "\n"
+  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
   0.upto($config["BOARD-HEIGHT"]) do |height|
     0.upto($config["BOARD-WIDTH"]) do |width|
       print $board[width][height].bchar
     end
     puts ""
   end
-  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"]) + $config["CHAR-CORNER"]
+  print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
 end
 e "Loaded genBoard()"
 
