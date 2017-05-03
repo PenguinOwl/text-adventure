@@ -254,8 +254,8 @@ end
 def genBoard
   system "clear"
   print $config["CHAR-CORNER"] + ($config["CHAR-HORIZONTAL"] * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
-  0.upto($config["BOARD-HEIGHT"]) do |height|
-    0.upto($config["BOARD-WIDTH"]) do |width|
+  0.upto($config["BOARD-HEIGHT"].to_i) do |height|
+    0.upto($config["BOARD-WIDTH"].to_i) do |width|
       print $board[width][height].bchar
     end
     puts ""
