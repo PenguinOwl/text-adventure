@@ -218,10 +218,10 @@ class NPC
 end
 
 class Node
-  def initialize(text,wall?)
+  def initialize(text,wall)
     attr_accessor :bchar, :text, :wall
     @text = text
-    @wall = bc wall?
+    @wall = bc wall
     if @wall
       @bchar = $config["CHAR-WALL"]
     else
