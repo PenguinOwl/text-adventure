@@ -191,7 +191,7 @@ def loadConfig(f=false)
     e "File opened."
     e "Alternate config found. Loading..."
     resetConfig
-    parse(file.read)
+    parse(file.read,f)
     ed
     file.close
     e "File closed."
