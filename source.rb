@@ -160,7 +160,7 @@ def parse(config,nodeing)
           superCache = []
           e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
           ed
-          e "Adding to board..."
+          e "Adding " + superCache.to_s + " board..."
           if superCache[2].strip == "location"
             $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(3))
           else
