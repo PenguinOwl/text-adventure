@@ -26,6 +26,9 @@ def e(text)
   if flag("-d")
     print Time.now.to_s + ": "
     puts text
+    if flag("-s")
+      sleep 0.05
+    end
   end
 end
 
@@ -156,9 +159,8 @@ def parse(config)
         superCache = []
         e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
         ed
-        e superCache[3].strip
         e "Adding to board..."
-        if superCache[3].strip == "location"
+        if superCache[2].strip == "location"
           $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(2))
         else
           $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(2))
@@ -212,6 +214,7 @@ end
 
 class NPC
   def initialize(name,hp,text,mode,reflect)
+    e "Creating NPC..."
     attr_accessor :bchar, :name, :hp, :text, :mode, :reflect
     @name = name
     @hp = hp.to_i
@@ -219,11 +222,13 @@ class NPC
     @mode = mode
     @reflect = bc reflect
     @bchar = $config["CHAR-ENEMY"]
+    ed
   end
 end
 
 class Node
   def initialize(text,wall)
+    e "Creating Node..."
     attr_accessor :bchar, :text, :wall
     @text = text
     @wall = bc wall
@@ -232,6 +237,7 @@ class Node
     else
       @bchar = $config["CHAR-SPACE"]
     end
+    ed
   end
 end
 
@@ -256,7 +262,9 @@ e "Loaded genBoard()"
 #   BUILDING
 #
 
+e "Defining empty board..."
 $board = []
+ed
 loadConfig
 e "Building board skeleton..."
 $board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
