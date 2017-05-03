@@ -157,14 +157,14 @@ def parse(config,nodeing)
         cache.scan(/\[\d+,\d+\]=>(?:location\("\S+",(?:true|false)\)|intio\("\w+",\d+,"\S+","\S+",(?:true|false)\))/).each do |e|
           d {print "Found node match: ", e, "\n"}
           e "Formatting..."
-          superCache = []
-          e.gsub!(/\w+/) { |ele| superCache << ele.to_s }
+          $unn = []
+          e.gsub!(/\w+/) { |ele| $unn << ele.to_s }
           ed
-          e "Adding " + superCache.to_s + " board..."
-          if superCache[2].strip == "location"
-            $board[superCache[0].to_i][superCache[1].to_i] = Node.new(*superCache.drop(3))
+          e "Adding " + $unn.to_s + " to board..."
+          if $unn[2].strip == "location"
+            $board[$unn[0].to_i][$unn[1].to_i] = Node.new(*$unn.drop(3))
           else
-            $board[superCache[0].to_i][superCache[1].to_i] = NPC.new(*superCache.drop(3))
+            $board[$unn[0].to_i][$unn[1].to_i] = NPC.new(*$unn.drop(3))
           end
         end
         ed
@@ -283,6 +283,7 @@ loadConfig
 e "Building board skeleton with length " + $config["BOARD-WIDTH"] + " and height " + $config["BOARD-HEIGHT"] + "..."
 $board = Array.new($config["BOARD-WIDTH"].to_i,Array.new($config["BOARD-HEIGHT"].to_i,Node.new("",false)))
 ed
+e "Using board : " + $board.to_s
 e "Reloading config..."
 loadConfig(true)
 ed
