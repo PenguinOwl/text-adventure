@@ -15,7 +15,7 @@
 #
 #   [] INDICATES MADATORY SETUP
 
-require 'handle'
+# require 'handle'
 
 #
 #   FLAG CHECKS
