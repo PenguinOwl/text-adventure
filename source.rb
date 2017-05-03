@@ -273,7 +273,7 @@ $board = []
 ed
 loadConfig
 e "Building board skeleton..."
-$board = Array.new($config["WIDTH"],Array.new($config["HIEGHT"],Node.new("",false)))
+$board = Array.new($config["WIDTH"].to_i,Array.new($config["HIEGHT"].to_i,Node.new("",false)))
 ed
 e "Reloading config..."
 loadConfig(true)
