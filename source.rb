@@ -41,6 +41,14 @@ end
 e "Loaded e()"
 e "Loaded flag()"
 
+def ed
+  if flag("-d")
+    print Time.now.to_s + ": "
+    puts "Done!"
+  end
+end
+e "Loaded ed()"
+
 e "Adding current dir to $LOAD_PATH..."
 $LOAD_PATH << Dir.pwd
 ed
@@ -62,14 +70,6 @@ def d
   end
 end
 e "Loaded d()"
-
-def ed
-  if flag("-d")
-    print Time.now.to_s + ": "
-    puts "Done!"
-  end
-end
-e "Loaded ed()"
 
 def rc
   if flag($config["RC-FLAG"]) or $config["RUN-CHECKS"] == "true"
