@@ -266,7 +266,11 @@ def genBoard
   0.upto($config["BOARD-HEIGHT"].to_i-1) do |height|
     print $config["CHAR-VERTICAL"] + " "
     0.upto($config["BOARD-WIDTH"].to_i-1) do |width|
-      print $board[width][height].bchar, " "
+      unless height == $cury and width == $curx
+        print $board[width][height].bchar, " "
+      else
+        print $config["CHAR-PLAYER"]
+      end
     end
     print $config["CHAR-VERTICAL"]
     puts ""
@@ -296,7 +300,7 @@ end
 #
 
 def setup
-  $curx,$cury = 0,0
+  $curx,$cury = 1,1
   e "Defining empty board..."
   $board = []
   ed
