@@ -15,8 +15,6 @@
 #
 #   [] INDICATES MADATORY SETUP
 
-# require 'handle'
-
 #
 #   FLAG CHECKS
 #
@@ -42,6 +40,13 @@ def flag(id,chk=false)
 end
 e "Loaded e()"
 e "Loaded flag()"
+
+e "Adding current dir to $LOAD_PATH..."
+$LOAD_PATH << Dir.pwd
+ed
+e "Getting handling file..."
+require 'handle'
+ed
 
 def fg(id)
   if ARGV.include? id
