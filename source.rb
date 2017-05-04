@@ -269,7 +269,7 @@ def genBoard
       unless height == $cury and width == $curx
         print $board[width][height].bchar, " "
       else
-        print $config["CHAR-PLAYER"]
+        print $config["CHAR-PLAYER"], " "
       end
     end
     print $config["CHAR-VERTICAL"]
