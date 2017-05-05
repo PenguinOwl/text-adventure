@@ -292,6 +292,16 @@ def mainloop
   genboard
   handle = gets.strip!
   HANDLE.handle(handle)
+  unless $board[$ncurx][$ncury].class == "Node"
+    unless $board[$ncurx][$ncury].wall
+    else
+      $ncurx = $curx
+      $ncury = $cury
+    end
+  else
+    $ncurx = $curx
+    $ncury = $cury
+  end
   mainloop
 end
 
