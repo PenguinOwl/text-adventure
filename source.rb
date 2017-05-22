@@ -260,7 +260,7 @@ e "Loaded Node class."
 
 def genBoard
   system "clear"
-  if cf("-ns")
+  if flag("-ns")
     s = ""
   else
     s = " "
