@@ -260,22 +260,27 @@ e "Loaded Node class."
 
 def genBoard
   system "clear"
+  if cf("-ns")
+    s = ""
+  else
+    s = " "
+  end
   e "Genning board..."
   e "Using board : " + $board.to_s
-  print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
+  print $config["CHAR-CORNER"] + s + (($config["CHAR-HORIZONTAL"]+s) * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"] + "\n"
   0.upto($config["BOARD-HEIGHT"].to_i-1) do |height|
-    print $config["CHAR-VERTICAL"] + " "
+    print $config["CHAR-VERTICAL"] + s
     0.upto($config["BOARD-WIDTH"].to_i-1) do |width|
       unless height == $cury and width == $curx
-        print $board[width][height].bchar, " "
+        print $board[width][height].bchar, s
       else
-        print $config["CHAR-PLAYER"], " "
+        print $config["CHAR-PLAYER"], s
       end
     end
     print $config["CHAR-VERTICAL"]
     puts ""
   end
-  print $config["CHAR-CORNER"] + " " + (($config["CHAR-HORIZONTAL"]+" ") * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
+  print $config["CHAR-CORNER"] + s + (($config["CHAR-HORIZONTAL"]+s) * $config["BOARD-WIDTH"].to_i) + $config["CHAR-CORNER"]
   puts ""
   ed
   unless flag("-d")
